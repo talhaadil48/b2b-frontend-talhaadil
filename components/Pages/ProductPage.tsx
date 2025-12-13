@@ -283,55 +283,7 @@ export default function ComprehensiveProductSelection({
   }
 
   const isMultipleSelectionAllowed = (detailKey: string): boolean => {
-    const multipleSelectionKeys = [
-      // Existing multiple selection types
-      "colors_available",
-      "sizes_available",
-      "patterns_available",
-      "designs_available",
-      "features",
-      "accessories_included",
-
-      // Additional logical multiple selection types
-      "occasions", // One item can be suitable for multiple occasions (casual, formal, business)
-      "care_instructions", // Multiple care methods can apply (machine wash, dry clean, hand wash)
-      "certifications", // Products can have multiple certifications (organic, fair trade, etc.)
-      "styles", // Multiple style variations (modern, classic, vintage)
-      "finishes", // Multiple finish options (matte, glossy, textured)
-      "textures", // Multiple texture options (smooth, rough, ribbed)
-      "compatible_with", // Compatible with multiple items/systems
-      "suitable_for", // Suitable for multiple uses/environments
-      "benefits", // Multiple benefits (comfort, durability, style)
-      "applications", // Multiple applications/uses
-      "variations", // Multiple variations available
-      "options", // General options that can be multiple
-    ]
-
-    // Single selection types (explicitly defined for clarity)
-    const singleSelectionKeys = [
-      "material_type", // Usually one primary material
-      "brand", // One brand per product
-      "gender", // One target gender
-      "fit_type", // One fit style (regular, slim, loose)
-      "season", // One primary season
-      "age_group", // One target age group
-      "weight_category", // One weight class
-      "size_category", // One size category
-      "origin_country", // One country of origin
-      "manufacturer", // One manufacturer
-      "collection", // One collection/series
-      "model", // One model number/name
-    ]
-
-    const lowerKey = detailKey.toLowerCase()
-
-    // Check if it's explicitly a single selection type
-    if (singleSelectionKeys.some((key) => lowerKey.includes(key.toLowerCase()))) {
-      return false
-    }
-
-    // Check if it's a multiple selection type
-    return multipleSelectionKeys.some((key) => lowerKey.includes(key.toLowerCase()))
+   return true;
   }
 
   const handleNext = async () => {

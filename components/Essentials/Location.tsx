@@ -8,7 +8,7 @@ const locations = [
   { icon: Layers, title: "Communications", location: "USA, Virginia Beach" },
   { icon: Package, title: "Regional USA", location: "USA, CA – San Francisco" },
   { icon: Phone, title: "Call Centre Office", location: "USA, Texas – Dallas" },
-  { icon: Warehouse, title: "USA Warehouse", location: "Allentown, PA" },
+  { icon: Warehouse, title: "USA Warehouse", location: " Inland Port Front Royal, VA" },
   { icon: Warehouse, title: "India Warehouse", location: "J & K – Srinagar" },
   { icon: Truck, title: "USA Logistics", location: "Illinois – Chicago" },
   { icon: Truck, title: "India Logistics", location: "Delhi – New Delhi" },
@@ -35,7 +35,9 @@ export default function Location() {
         <h1
           className={`${is4K ? "text-5xl md:text-6xl" : "text-4xl md:text-5xl"} font-bold text-[var(--primary-color)] text-left ml-3 lg:ml-0 mb-12 leading-tight mt-10 `}
         >
-          Our Global Presence & Impact
+
+          Our Global Footprint & Growth
+
         </h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 items-start">

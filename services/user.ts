@@ -1,31 +1,28 @@
 import api from "@/lib/axios";
 
 export const get_product_by_user_id = (user_id: number) => {
-    return api.get(`/user/user-product_data/${user_id}`, {
-      headers: {
-        requiresAuth: true,
-      },
-    }); 
+  return api.get(`/user/user-product_data/${user_id}`, {
+    headers: {
+      requiresAuth: true,
+    },
+  });
 };
 
+export const getCurrentLevel = () => {
+  return api.get(`/verification/current-partnership`, {
+    headers: {
+      requiresAuth: true,
+    },
+  });
+};
 
-export const getCurrentLevel = () =>{
-    return api.get(`/verification/current-partnership`, {
-      headers: {
-        requiresAuth: true,
-      },
-    });
-}
-
-export const getAvaliableLevels = () =>{
-    return api.get(`/verification/available-partnerships`, {
-      headers: {
-        requiresAuth: true,
-      },
-    });
-}
-
-
+export const getAvaliableLevels = () => {
+  return api.get(`/verification/available-partnerships`, {
+    headers: {
+      requiresAuth: true,
+    },
+  });
+};
 
 export const markUserAsLateral = (isLateral: boolean) => {
   return api.post(`/user/user-lateral?is_lateral=${isLateral}`, null, {
@@ -42,7 +39,6 @@ export const getUserRegistrationSelected = () => {
   });
 };
 
-
 export const getRegistrationAgreement = () => {
   return api.get(`/registration/agreement`, {
     headers: {
@@ -51,16 +47,19 @@ export const getRegistrationAgreement = () => {
   });
 };
 
-export const updateRegistrationAgreementUrl = (data: any) => {
+export const updateRegistrationAgreementUrl = (data: {
+  partnership_level: string;
+  agreement_url: string;
+}) => {
   return api.put(
-    `/registration/agreement-url`,
-    {}, // empty body since you're sending query params
+    `/registration/agreement-url/${data.partnership_level}`, // include path param
+    {}, // body is empty
     {
       headers: {
         requiresAuth: true,
       },
       params: {
-        agreement_url: data.agreement_url,
+        agreement_url: data.agreement_url, // query param
       },
     }
   );
@@ -81,7 +80,16 @@ export const updatePartnership = (partnership_level: string) => {
   );
 };
 
-
+export const deactivatePartnership = (data: {
+  partnership_level: string;
+  deactivation_reason: string;
+}) => {
+  return api.post(`/user/deactivate-partnership`, data, {
+    headers: {
+      requiresAuth: true,
+    },
+  });
+};
 
 export const postFirst = () => {
   return api.post(`/user/first-register?is_first_register=true`, null, {
@@ -90,8 +98,6 @@ export const postFirst = () => {
     },
   });
 };
-
-
 
 export const getRejectedUser = (userId: number) => {
   return api.post(`/user/rejected/${userId}`, {

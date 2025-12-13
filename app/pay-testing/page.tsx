@@ -9,6 +9,7 @@ import {
   createRegistrationPayment,
 
 } from "@/services/payments";
+import { convertOffsetToTimes } from "framer-motion";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
@@ -54,8 +55,10 @@ function CheckoutForm() {
         });
         console.log("registration payment response", res);
       }
-
+      console.log(res)
       const clientSecret = res.data.client_secret;
+      
+
 
       // 2️⃣ Confirm payment with Stripe Elements
       const cardElement = elements.getElement(CardElement);
@@ -76,6 +79,7 @@ function CheckoutForm() {
       }
     } catch (error: any) {
       const detail = error.response?.data?.detail;
+      console.log("error detail", detail);
       if (detail && typeof detail === "object") {
         setMessage(JSON.stringify(detail, null, 2));
       } else {

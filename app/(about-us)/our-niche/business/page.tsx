@@ -433,7 +433,7 @@ function page() {
         <div className="w-full max-w-6xl mx-auto mt-8 px-4 sm:px-6 lg:px-8">
           <div className="w-full overflow-hidden rounded-xl shadow-lg">
             <img
-              src="/images/image20.webp"
+              src="/images/image888.webp"
               alt="Future Vision"
               className="w-full h-auto object-contain"
             />

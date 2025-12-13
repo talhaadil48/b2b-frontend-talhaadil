@@ -27,12 +27,11 @@ api.interceptors.request.use(
 
     if (config.headers?.requiresAuth) {
       config.headers.Authorization = `Bearer ${accessToken}`
-      console.log("|HOWELLo")
+     
       
     }
     if (config.headers?.isNull) {
       config.headers.Authorization = null
-      console.log("|HOWELLodasddasdasd")
     }
 
     return config

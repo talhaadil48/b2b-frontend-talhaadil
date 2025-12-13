@@ -117,7 +117,7 @@ export default function DeKoshurCrafts() {
         </div>
       </section>
       <img
-        src="/images/image5.png"
+        src="/images/image55.png"
         className="w-full md:w-[60vw] h-[45vh] md:h-[80vh] mx-auto block"
       ></img>
 
@@ -269,7 +269,7 @@ export default function DeKoshurCrafts() {
       <div className="bg-white">
         <Link href="https://craftlore.org/">
           <img
-            src="/images/image10.webp"
+            src="/images/image100.webp"
             className="w-full md:w-[60vw] h-[45vh] md:h-[80vh] mx-auto block"
           ></img>
         </Link>
@@ -411,21 +411,21 @@ export default function DeKoshurCrafts() {
           <h2 className="text-3xl sm:text-4xl font-bold text-[var(--primary-color)] mb-4">
             Let’s Uphold the Legacy of Kashmir Craft Together
           </h2>
+          <div className="text-left">
 
-          <p className="text-lg sm:text-xl text-gray-600 leading-relaxed">
-            In a world dominated by mass production, Kashmir has remained steadfast —
-            refusing to let machines erode the sacred soul of its artistry. Kashmir and
-            its capital, Srinagar, stand as the beating heart of this timeless heritage.
-            Proudly stands among 50 global cities in the UNESCO Creative Cities Network
-            (Crafts & Folk Art) — a mark of enduring excellence on the world stage.
-            Honored among 63 World Craft Cities by the World Craft Council (WCC),
-            reaffirming Kashmir’s stature as a global epicenter of artisanal brilliance.
-            Bears the legacy of the Silk Route, the ancient civilization of creative
-            exchange and craftsmanship (1st Century BCE – 15th Century CE). Home to the
-            largest living guild of master artisans — a timeless sanctuary for those who
-            made Kashmir their lifelong devotion, preserving and perfecting its sacred
-            craft legacy.
-          </p>
+            <p className="text-lg sm:text-xl text-gray-600 leading-relaxed mb-4">
+              Kashmir is not just a region. It is one of humanity’s oldest creative sanctuaries, a place where hands, not machines, shaped history. In a world racing toward mass production, Kashmir stands as a rare stronghold of soul, precision, and artistic truth. Its capital, Srinagar, remains the living heartbeat of a craft civilization that has endured for centuries.
+            </p>
+
+            <p className="text-lg sm:text-xl text-gray-600 leading-relaxed mb-4">
+              Recognized among UNESCO Creative Cities, honored as a World Craft City, and rooted in the legacy of the Silk Route, Kashmir represents an unbroken chain of mastery from ancient times to the present. Across millennia, it has served as a crossroads of ideas, artisans, merchants, cultures, and kingdoms, each leaving behind threads that today form the fabric of Kashmiri craftsmanship.
+            </p>
+
+            <p className="text-lg sm:text-xl text-gray-600 leading-relaxed mb-4">
+              This land has nurtured the largest living guild of master artisans on earth. Their skills cannot be automated, replicated, or replaced. These are generational lineages, fathers teaching sons, mothers teaching daughters, passing forward sacred knowledge with patience, devotion, and discipline. But heritage survives only when people choose to protect it. And that choice belongs to all of us.
+            </p>
+          </div>
+
 
 
         </div>

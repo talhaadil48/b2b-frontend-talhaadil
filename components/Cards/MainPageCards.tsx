@@ -19,97 +19,99 @@ export default function MainPageCards() {
       icon: Globe,
       title: "US Handicraft Market Access",
       challenge:
-        "Limited international access for Kashmiri artisans, restricting visibility.",
+        "Limited international entry for artisans reduces visibility and opportunity.",
       benefit:
-        "De Koshur Crafts empowers global visibility through e-commerce, exhibitions, and retail spaces, connecting artisans to U.S. buyers.",
+        "De Koshur Crafts enables global visibility through e-commerce, exhibitions, and retail partnerships, connecting artisans to U.S. buyers.",
       color: "text-[var(--secondary-color)]",
     },
     {
       icon: Truck,
       title: "Infrastructure Challenges Solved",
       challenge:
-        "Small businesses struggle with logistics, warehousing, and customs navigation.",
+        "Small businesses face obstacles in logistics, warehousing, and customs processes.",
       benefit:
-        "De Koshur Crafts handles logistics, ensuring seamless global access for U.S. buyers while artisans focus on craftsmanship.",
+        "De Koshur Crafts manages logistics end-to-end, ensuring seamless U.S. access so artisans can focus fully on craftsmanship.",
       color: "text-[var(--secondary-color)]",
     },
     {
       icon: Shield,
       title: "Ethical Standards Simplified",
       challenge:
-        "Difficulty in meeting global compliance standards for fair trade and sustainability.",
+        "Meeting global compliance, sustainability, and fair-trade standards is difficult for artisans.",
       benefit:
-        "De Koshur Crafts ensures products align with global standards, ensuring ethical sourcing and credibility.",
+        "De Koshur Crafts ensures products follow global ethics requirements, strengthening sourcing credibility and international trust.",
       color: "text-[var(--secondary-color)]",
     },
     {
       icon: DollarSign,
       title: "Financial Risks Minimized",
       challenge:
-        "High upfront costs for international marketing and distribution.",
+        "High upfront costs for marketing, distribution, and international expansion.",
       benefit:
-        "De Koshur Crafts offers flexible models like consignment, reducing risks and maximizing global exposure for buyers.",
+        "De Koshur Crafts offers flexible models like consignment, reducing financial risk and increasing global exposure.",
       color: "text-[var(--secondary-color)]",
     },
     {
       icon: Megaphone,
       title: "Branding and Marketing",
       challenge:
-        "Difficulty in establishing brand recognition in global markets.",
+        "Building brand recognition in global markets is challenging for small producers.",
       benefit:
-        "De Koshur Crafts provides professional branding, marketing platforms, and event promotions to boost product visibility.",
+        "De Koshur Crafts provides branding tools, marketing platforms, and promotional opportunities to elevate product visibility.",
       color: "text-[var(--secondary-color)]",
     },
     {
       icon: Award,
       title: "Quality Improvement Resources",
       challenge:
-        "Difficulty in meeting global quality standards and packaging requirements.",
+        "Meeting international quality and packaging standards can be resource-intensive.",
       benefit:
-        "De Koshur Crafts offers quality tools, expert photography, and eco-friendly packaging, empowering buyers to compete globally.",
+        "De Koshur Crafts offers quality tools, expert photography, and eco-friendly packaging to help artisans compete globally.",
       color: "text-[var(--secondary-color)]",
     },
     {
       icon: Network,
       title: "Industry Network Access",
       challenge:
-        "Limited access to essential industry networks and high-value international buyers.",
+        "Artisans lack access to high-value networks and industry-leading buyers.",
       benefit:
-        "De Koshur Crafts connects buyers to industry networks, opening doors to critical markets and new opportunities.",
+        "De Koshur Crafts links artisans to strategic networks, opening doors to key markets and new opportunities.",
       color: "text-[var(--secondary-color)]",
     },
     {
       icon: Recycle,
       title: "Sustainable Business Models",
-      challenge: "Seasonal demand and limited market diversification.",
+      challenge:
+        "Seasonal demand and limited diversification restrict long-term stability.",
       benefit:
-        "De Koshur Crafts offers diverse business models, from e-commerce to franchises, ensuring long-term sustainability for buyers.",
+        "De Koshur Crafts provides diversified models—from e-commerce to franchising—ensuring sustainable growth for artisans.",
       color: "text-[var(--secondary-color)]",
     },
     {
       icon: Lock,
       title: "Counterfeit Product Protection",
-      challenge: "Risk of counterfeit goods and misrepresentation.",
+      challenge:
+        "Risk of counterfeits, misrepresentation, and loss of product authenticity.",
       benefit:
-        "De Koshur Crafts safeguards authenticity with blockchain verification, ensuring only genuine products reach global customers.",
+        "De Koshur Crafts protects authenticity using blockchain verification, ensuring only genuine products reach global customers.",
       color: "text-[var(--secondary-color)]",
     },
   ];
 
+
   return (
     <div
       className="px-3 sm:px-4 md:px-6 lg:px-8 bg-gray-100 py-8 lg:py-20"
-     
+
     >
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-10 md:mb-12">
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--primary-color)] mb-2 sm:mb-4 px-4">
-            Why you need De Koshur Crafts Partnerships ?
+            Why You Need De Koshur Crafts Partnerships
           </h1>
           <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mx-auto px-4 leading-relaxed">
-            Empowering Kashmiri artisans through innovative solutions that
-            bridge traditional craftsmanship with global market access
+            Empowering Kashmiri artisans through modern solutions that link traditional craftsmanship with global market access.
           </p>
         </div>
 

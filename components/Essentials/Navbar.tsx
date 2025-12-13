@@ -399,7 +399,7 @@ export function Navbar() {
             </Link>
 
             <DesktopDropdown title="About Us" items={aboutItems} isSignedIn={true} />
-            <DesktopDropdown title="Partnerships" items={partnershipItems} isSignedIn={isSignedIn} />
+            <DesktopDropdown title="Partnerships" items={partnershipItems} isSignedIn={true} />
 
             <LockedLink href="/process" isSignedIn={isSignedIn} className="text-white text-md font-medium relative group py-2">
               Process
@@ -488,7 +488,7 @@ export function Navbar() {
                   </MobileMenuItem>
 
                   <MobileDropdownMenu title="About Us" items={aboutItems} onLinkClick={closeMobileMenu} isSignedIn={true} />
-                  <MobileDropdownMenu title="Partnerships" items={partnershipItems} onLinkClick={closeMobileMenu} isSignedIn={isSignedIn} />
+                  <MobileDropdownMenu title="Partnerships" items={partnershipItems} onLinkClick={closeMobileMenu} isSignedIn={true} />
 
                   <LockedLink href="/process" isSignedIn={isSignedIn} onClick={closeMobileMenu} className="block px-6 py-4 text-white text-lg">
                     Process

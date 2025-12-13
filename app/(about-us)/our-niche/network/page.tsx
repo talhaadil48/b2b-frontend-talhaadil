@@ -7,6 +7,13 @@ function page() {
   const { is4K } = useGlobalContext();
 
   const items = [
+     {
+      image: "/logos/dekoshur.png",
+      title: "De Koshur Crafts",
+      description:
+        "A multi-vendor, headless e-commerce platform powered by American business strategy and modern technology — bridging Kashmiri craftsmanship with global markets through blockchain traceability, fair-value trade, and innovation-driven authenticity.",
+      link: "https://dekoshur.org",
+    },
     {
       image: "/logos/craftlore.png",
       title: "Craftlore",
@@ -21,13 +28,7 @@ function page() {
         "A Kashmir Craft & Tourism Convergence Marketplace connecting travelers with artisan-led stays, craft safaris, eco-retreats, dining voyages, and cultural workshops — transforming tourism into a craft-sustaining movement that preserves heritage and empowers communities.",
       link: "https://artstay.org",
     },
-    {
-      image: "/logos/dekoshur.png",
-      title: "De Koshur Crafts",
-      description:
-        "A multi-vendor, headless e-commerce platform powered by American business strategy and modern technology — bridging Kashmiri craftsmanship with global markets through blockchain traceability, fair-value trade, and innovation-driven authenticity.",
-      link: "https://dekoshur.org",
-    },
+   
     {
       image: "/logos/sufi.png",
       title: "Sufi Science Center",

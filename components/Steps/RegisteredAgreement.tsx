@@ -51,7 +51,7 @@ const partnershipTypeMapping: { [key: string]: string } = {
 export default function RegisterAgreement({ partnershipId }: BuyerAgreementProps) {
     const { is4K } = useGlobalContext()
     const [currentStep, setCurrentStep] = useState(1)
-    const [loading,setLoading] = useState(false)
+    const [loading, setLoading] = useState(false)
     const [partnershipData, setPartnershipData] = useState<any>(null)
     const [partnershipTitle, setPartnershipTitle] = useState<string>(partnershipTypeMapping[partnershipId] || "Drop Shipping Buyer Partnership Agreement")
     const [formData, setFormData] = useState<FormData>({
@@ -391,11 +391,12 @@ This agreement is governed under U.S. law and is legally binding under federal a
         doc.text("De Koshur Crafts Bazaar LLC - Confidential Document", margin, pageHeight - 15)
 
         const pdfBlob = doc.output("blob")
-     
+
         return pdfBlob
     }
 
     const handleGenerateAndUpload = async () => {
+        setLoading(true)
         const pdfBlob = generatePDF()
         const uniqueName = `MyAgreement_${Date.now()}_${Math.random().toString(36).substring(2, 8)}.pdf`
 
@@ -414,6 +415,7 @@ This agreement is governed under U.S. law and is legally binding under federal a
             console.log("Upload successful:", data)
             try {
                 const response = await updateRegistrationAgreementUrl({
+                    partnership_level: partnershipId.toUpperCase(),
                     agreement_url: data.url,
                 })
                 console.log(response)
@@ -425,10 +427,16 @@ This agreement is governed under U.S. law and is legally binding under federal a
                 console.log("API call failed:", error)
 
             }
+            finally {
+
+            }
         } else {
             console.error("Upload failed:", data.error)
             console.log("error")
+
+
         }
+        setLoading(false)
 
     }
 
@@ -436,6 +444,7 @@ This agreement is governed under U.S. law and is legally binding under federal a
         if (currentStep < 4 && canProceedToNext()) {
             setCurrentStep(currentStep + 1)
         } else if (currentStep === 4 && canProceedToNext()) {
+
             handleGenerateAndUpload()
         }
     }

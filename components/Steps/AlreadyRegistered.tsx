@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { FaHandshake, FaCheck, FaLock } from "react-icons/fa"
 import Cookies from "js-cookie"
 import { useGlobalContext } from "@/context/ScreenProvider"
-import { getCurrentLevel, getAvaliableLevels } from "@/services/user"
+import { getCurrentLevel, getAvaliableLevels, deactivatePartnership } from "@/services/user"
 import RegisterAgreement from "./RegisteredAgreement"
 
 interface Partnership {
@@ -366,6 +366,20 @@ export default function PartnershipDisplay() {
     const handleSubmitPartnership = (partnershipId: string) => {
         setSelectedPartnershipId(partnershipId)
     }
+    const handleDeactivatePartnership = async (partnership_level: string) => {
+        console.log(`Deactivating partnership: ${partnership_level}`)
+        try {
+            await deactivatePartnership({
+                partnership_level: partnership_level.toUpperCase(),
+                deactivation_reason: "User requested deactivation",
+            });
+            alert(`Partnership ${partnership_level} deactivated successfully`);
+            // Optionally refresh your data or state here
+        } catch (error: any) {
+            alert(`${error.response?.data?.detail || error.message}`);
+        }
+    };
+
 
     const handleGoToPay = (p: Partnership) => {
         console.log(`Go to pay for partnership: ${p.partnership_name}`)
@@ -538,6 +552,15 @@ export default function PartnershipDisplay() {
                                         Submit Partnership
                                     </button>
                                 )}
+                                {p.isCurrent && (
+                                    <button
+                                        onClick={() => handleDeactivatePartnership(p.id)}
+                                        className={`w-full py-2 text-sm font-semibold text-white bg-[var(--primary-color)] rounded-full hover:bg-[var(--primary-hover-color)] transition-colors ${is4K ? "text-base" : ""}`}
+                                    >
+                                        Deactivate Partnership
+                                    </button>
+                                )}
+
                                 {!p.available && !p.isCurrent && (
                                     <div className="mt-auto space-y-3 pt-4 border-t border-gray-200">
                                         <button

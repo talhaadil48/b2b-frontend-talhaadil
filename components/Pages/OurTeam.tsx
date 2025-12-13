@@ -305,7 +305,8 @@ export default function OurTeam() {
       </section>
 
       {/* Rectangle Highlight Section */}
-      <RectangleSection />
+      <div className="py-6"><RectangleSection /></div>
+
 
       {/* Team Members Section */}
       <section className="py-20 bg-[var(--primary-color)] text-center">
@@ -373,7 +374,7 @@ export default function OurTeam() {
           </div>
         </div>
       </section>
-        <TeamPage />
+      <TeamPage />
     </div>
   );
 }

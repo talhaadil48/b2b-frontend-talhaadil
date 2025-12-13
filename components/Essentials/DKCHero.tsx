@@ -217,31 +217,31 @@ export default function DKCHero() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
                         {[
                             {
-                                name: "Core Trade",
-                                desc: "We focus on trade quality, efficiency, and lasting global reliability.",
-                                img: "ShoppingCart",
+                                icon: "ShoppingCart",
+                                title: "Core Trade",
+                                desc: "We support global commerce through structured trading models, streamlined operations, and reliable distribution networks.",
                                 link: "/core-trade",
                             },
                             {
-                                name: "Brand Growth",
-                                desc: "We help brands expand reach, boost presence, and achieve success.",
-                                img: "Rocket",
+                                icon: "Rocket",
+                                title: "Brand Growth",
+                                desc: "We help brands expand through strategic promotion, enhanced visibility, audience engagement, and consistent market positioning.",
                                 link: "/brand-growth",
                             },
                             {
-                                name: "Collaborative",
-                                desc: "We build networks, share resources, and drive growth.",
-                                img: "Users",
+                                icon: "Users",
+                                title: "Collaborative",
+                                desc: "We build shared value by partnering creatively, aligning teams, and delivering strong outcomes across projects.",
                                 link: "/collaborative",
                             },
                             {
-                                name: "Institutional",
-                                desc: "We partner with firms, strengthen ties, and foster lasting trust.",
-                                img: "Building",
+                                icon: "Building",
+                                title: "Institutional",
+                                desc: "We work with organizations to strengthen systems, improve efficiency, and deliver sustainable long-term impact.",
                                 link: "/institutional",
                             },
                         ].map((card, index) => {
-                           const IconComponent = LucideIcons[card.img] as React.ComponentType<{ size?: number; className?: string }>; // dynamically get Lucide icon
+                            const IconComponent = LucideIcons[card.icon] as React.ComponentType<{ size?: number; className?: string }>; // dynamically get Lucide icon
 
                             return (
                                 <motion.a
@@ -259,7 +259,7 @@ export default function DKCHero() {
       "
                                 >
                                     <IconComponent className="w-10 h-10 mb-8 text-white" />
-                                    <h3 className="text-2xl sm:text-3xl font-semibold mb-4">{card.name}</h3>
+                                    <h3 className="text-2xl sm:text-3xl font-semibold mb-4">{card.title}</h3>
                                     <p className="text-white/80 text-lg sm:text-base leading-relaxed">
                                         {card.desc}
                                     </p>

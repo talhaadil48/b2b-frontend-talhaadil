@@ -19,65 +19,66 @@ export default function Home() {
           <div className="flex-1">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 h-fit">
               <div className="bg-[var(--secondary-light-color)] p-4 sm:p-6 rounded-lg border-l-4 border-[var(--secondary-color)]">
-                <h3 className="text-lg sm:text-xl font-semibold text-[var(--primary-color)] mb-3">
+                <h3 className="text-lg sm:text-xl font-semibold text-white mb-3">
                   Product Credibility
                 </h3>
-                <p className="text-sm sm:text-base text-gray-700">
+                <p className="text-sm sm:text-base text-white">
                   Certifications validate quality, authenticity, origin, and
                   global compliance standards.
                 </p>
               </div>
 
               <div className="bg-[var(--secondary-light-color)] p-4 sm:p-6 rounded-lg border-l-4 border-[var(--secondary-color)]">
-                <h3 className="text-lg sm:text-xl font-semibold text-[var(--primary-color)] mb-3">
+                <h3 className="text-lg sm:text-xl font-semibold text-white mb-3">
                   Market Access
                 </h3>
-                <p className="text-sm sm:text-base text-gray-700">
+                <p className="text-sm sm:text-base text-white">
                   Certified products unlock premium global markets and verified
                   trade opportunities.
                 </p>
               </div>
 
               <div className="bg-[var(--secondary-light-color)] p-4 sm:p-6 rounded-lg border-l-4 border-[var(--secondary-color)]">
-                <h3 className="text-lg sm:text-xl font-semibold text-[var(--primary-color)] mb-3">
+                <h3 className="text-lg sm:text-xl font-semibold text-white mb-3">
                   Competitive Edge
                 </h3>
-                <p className="text-sm sm:text-base text-gray-700">
+                <p className="text-sm sm:text-base text-white">
                   Recognized certifications enhance reputation, reliability, and
                   global business differentiation.
                 </p>
               </div>
 
               <div className="bg-[var(--secondary-light-color)] p-4 sm:p-6 rounded-lg border-l-4 border-[var(--secondary-color)]">
-                <h3 className="text-lg sm:text-xl font-semibold text-[var(--primary-color)] mb-3">
+                <h3 className="text-lg sm:text-xl font-semibold text-white mb-3">
                   Customer Trust
                 </h3>
-                <p className="text-sm sm:text-base text-gray-700">
+                <p className="text-sm sm:text-base text-white">
                   Verified quality assurance builds transparency, loyalty, and
                   long-term buyer confidence.
                 </p>
               </div>
 
               <div className="bg-[var(--secondary-light-color)] p-4 sm:p-6 rounded-lg border-l-4 border-[var(--secondary-color)]">
-                <h3 className="text-lg sm:text-xl font-semibold text-[var(--primary-color)] mb-3">
+                <h3 className="text-lg sm:text-xl font-semibold text-white mb-3">
                   Sustainability Edge
                 </h3>
-                <p className="text-sm sm:text-base text-gray-700">
+                <p className="text-sm sm:text-base text-white">
                   Certified eco-practices attract conscious buyers and promote
                   ethical global commerce.
                 </p>
               </div>
 
               <div className="bg-[var(--secondary-light-color)] p-4 sm:p-6 rounded-lg border-l-4 border-[var(--secondary-color)]">
-                <h3 className="text-lg sm:text-xl font-semibold text-[var(--primary-color)] mb-3">
+                <h3 className="text-lg sm:text-xl font-semibold text-white mb-3">
                   Growth Potential
                 </h3>
-                <p className="text-sm sm:text-base text-gray-700">
+                <p className="text-sm sm:text-base text-white">
                   Certification drives expansion through partnerships,
                   scalability, and new market access.
                 </p>
               </div>
             </div>
+
           </div>
 
           <div className="flex-1 flex">

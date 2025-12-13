@@ -175,3 +175,60 @@ export const approveDocument = (document_id: number,status : boolean) => {
     }
   );
 };
+
+
+
+// Get all partnership fees (Admin only)
+export const getAllPartnershipFees = () => {
+  return api.get(`/admin/partnership-fees/`, {
+    headers: {
+      requiresAuth: true,
+    },
+  });
+};
+
+// Get partnership fees for a specific level group (Admin only)
+// level_group: "LEVEL_1" | "LEVEL_2" | "LEVEL_3" | "LEVEL_4"
+export const getPartnershipFeeByLevel = (level_group: string) => {
+  return api.get(`/admin/partnership-fees/${level_group}`, {
+    headers: {
+      requiresAuth: true,
+    },
+  });
+};
+
+// Create partnership fees for a level group (Admin only)
+export const createPartnershipFee = (data: {
+  level_group: string;
+  registration_fee: number;
+  lateral_fees: {
+    "1st": number;
+    "2nd": number;
+    "3rd": number;
+  };
+}) => {
+  return api.post(`/admin/partnership-fees/`, data, {
+    headers: {
+      requiresAuth: true,
+    },
+  });
+};
+
+// Update registration fee and/or lateral fees for a level group (Admin only)
+export const updatePartnershipFee = (
+  level_group: string,
+  data: {
+    registration_fee?: number;
+    lateral_fees?: {
+      "1st"?: number;
+      "2nd"?: number;
+      "3rd"?: number;
+    };
+  }
+) => {
+  return api.put(`/admin/partnership-fees/${level_group}`, data, {
+    headers: {
+      requiresAuth: true,
+    },
+  });
+};
