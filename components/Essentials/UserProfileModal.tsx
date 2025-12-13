@@ -24,13 +24,7 @@ export default function UserProfilePage() {
         <div
           className={`flex flex-col items-center justify-center px-4 py-8 sm:p-12 bg-[var(--primary-color)] text-white text-center ${is4K ? "py-12 sm:p-16" : ""}`}
         >
-          <Image
-            src="/placeholder.svg?height=200&width=200&text=User+Avatar"
-            alt="User Profile Picture"
-            width={160}
-            height={160}
-            className={`object-cover rounded-full border-4 border-white shadow-md w-32 h-32 sm:w-40 sm:h-40 ${is4K ? "w-48 h-48 sm:w-56 sm:h-56" : ""}`}
-          />
+        
           <h2
             className={`text-2xl sm:text-4xl font-bold mt-4 sm:mt-6 break-words ${is4K ? "text-4xl sm:text-6xl" : ""}`}
           >

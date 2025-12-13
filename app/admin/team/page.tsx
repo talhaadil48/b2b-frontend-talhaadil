@@ -59,7 +59,7 @@ export default function TeamPage() {
       name: formData.name,
       title: formData.title,
       email: formData.email,
-      imageUrl: "/placeholder.svg?height=400&width=400",
+     
     }
     setAllMembers([...allMembers, newMember])
     setFormData({ name: "", title: "", email: "", division: "" })

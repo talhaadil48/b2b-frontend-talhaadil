@@ -40,9 +40,7 @@ export function FlipCard({
           <h3 className={`text-[1.2rem] md:text-[2.4rem] font-bold text-white mb-2`}>
             {title}
           </h3>
-          <p className={`text-[1rem] md:text-[1rem] font-semibold text-gray-200`}>
-            {description}
-          </p>
+          
         </div>
 
         {/* Back Side */}

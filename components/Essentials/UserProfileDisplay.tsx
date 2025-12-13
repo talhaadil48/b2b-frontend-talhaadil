@@ -6,9 +6,8 @@ import { useAuthentication } from "@/context/AuthenticationWrapper"
 import Cookies from "js-cookie"
 import { Lock } from "lucide-react"
 import { User2 } from "lucide-react"
-export function UserProfileDisplay({ userName, userAvatarSrc,role }: {
+export function UserProfileDisplay({ userName,role }: {
   userName: string,
-  userAvatarSrc: string
 role: string
 }) {
   const [open, setOpen] = useState(false)

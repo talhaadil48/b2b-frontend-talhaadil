@@ -4,7 +4,7 @@ import { FaHandshake, FaCheck, FaLock } from "react-icons/fa"
 import Cookies from "js-cookie"
 import { useGlobalContext } from "@/context/ScreenProvider"
 import { getCurrentLevel, getAvaliableLevels } from "@/services/user"
-import RegisterAgreement from "./RegisteredAgreement" // Import the BuyerAgreement component
+import RegisterAgreement from "./RegisteredAgreement"
 
 interface Partnership {
     id: string
@@ -17,18 +17,19 @@ interface Partnership {
     kpiScore: string
     available: boolean
     isAltPath?: boolean
+    isCurrent?: boolean
 }
 
 interface PartnershipData {
     available_partnerships: string[]
     kpi_score: number
-    current_partnership_level: string
+    current_partnership_level: string[]
     retention_period: string
     retention_expiration: string
 }
 
 interface CurrentPartnership {
-    partnership_level: string
+    partnership_level: string[]
     kpi_score: number
     retention_period: string
     retention_expiration: string
@@ -237,7 +238,7 @@ export default function PartnershipDisplay() {
     const [displayPartnerships, setDisplayPartnerships] = useState<Partnership[]>(partnerships)
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
-    const [selectedPartnershipId, setSelectedPartnershipId] = useState<string | null>(null) // State to track selected partnership
+    const [selectedPartnershipId, setSelectedPartnershipId] = useState<string | null>(null)
 
     useEffect(() => {
         const roleFromCookie = Cookies.get("user_role") as "vendor" | "buyer" | undefined
@@ -262,12 +263,16 @@ export default function PartnershipDisplay() {
                 const currentData = currentLevelResponse.data
                 const availableData = availableLevelsResponse.data
 
-                if (currentData.partnership_level === "BRICK_MORTRAR") {
-                    currentData.partnership_level = "BRICK_MORTAR"
+                // Fix BRICK_MORTRAR typo in all partnership levels
+                if (currentData.partnership_level) {
+                    currentData.partnership_level = currentData.partnership_level.map((p: string) =>
+                        p === "BRICK_MORTRAR" ? "BRICK_MORTAR" : p
+                    )
                 }
-
-                if (availableData.current_partnership_level === "BRICK_MORTRAR") {
-                    availableData.current_partnership_level = "BRICK_MORTAR"
+                if (availableData.current_partnership_level) {
+                    availableData.current_partnership_level = availableData.current_partnership_level.map((p: string) =>
+                        p === "BRICK_MORTRAR" ? "BRICK_MORTAR" : p
+                    )
                 }
 
                 setCurrentPartnership(currentData)
@@ -282,49 +287,68 @@ export default function PartnershipDisplay() {
 
         fetchPartnershipData()
     }, [])
-    useEffect(() => {
-        window.scrollTo({ top: 0, behavior: "smooth" })
-    }, [])
 
     useEffect(() => {
         if (partnershipData && currentPartnership) {
+            // Normalize current partnership levels to lowercase IDs
+            const currentPartnershipIds = currentPartnership.partnership_level.map((p) =>
+                p.toLowerCase()
+            )
 
-            const normalizedAvailable = partnershipData.available_partnerships.map(
-                (p) => p.toLowerCase()
-            );
+            // Normalize available partnerships
+            const normalizedAvailable = partnershipData.available_partnerships.map((p) =>
+                p.toLowerCase()
+            )
 
+            // Get all current partnership levels
+            const currentLevels = partnerships
+                .filter((p) => currentPartnershipIds.includes(p.id))
+                .map((p) => p.level)
+
+            // Get the highest current level
+            const highestCurrentLevel = currentLevels.length > 0 ? Math.max(...currentLevels) : 0
+
+            // Get available levels from API
             const availableLevels = partnerships
                 .filter((p) => normalizedAvailable.includes(p.id))
-                .map((p) => p.level);
+                .map((p) => p.level)
 
-            const currentPart = partnerships.find(
-                (p) => p.id.toUpperCase() === currentPartnership.partnership_level
-            );
-            const currentLevel = currentPart ? currentPart.level : 0;
+            // Determine the max unlocked level (either from current or available)
+            const maxUnlockedLevel = Math.max(highestCurrentLevel, ...availableLevels, 0)
 
-            const maxLevel = Math.max(currentLevel, ...availableLevels, 0);
+            // Logic: If available_partnerships is empty, all levels before current are available
+            const shouldUnlockPrevious = normalizedAvailable.length === 0 && currentLevels.length > 0
 
-            // ---- NEW: calculate alt-path range (next 3 levels) ----
-            const altStart = maxLevel + 1;
-            const altEnd = maxLevel + 3;
+            // Calculate alt-path range (next 3 levels after max unlocked)
+            const altStart = maxUnlockedLevel + 1
+            const altEnd = maxUnlockedLevel + 3
 
             const updatedPartnerships = partnerships.map((p) => {
-                const isAvailable =
-                    p.level <= maxLevel || normalizedAvailable.includes(p.id);
+                const isCurrent = currentPartnershipIds.includes(p.id)
 
-                const isAltPath =
-                    !isAvailable && p.level >= altStart && p.level <= altEnd;
+                let isAvailable = false
+
+                if (shouldUnlockPrevious) {
+                    // If available_partnerships is empty, unlock all levels below current
+                    isAvailable = p.level < highestCurrentLevel
+                } else {
+                    // Normal logic: available if in API response or level <= max unlocked
+                    isAvailable = p.level <= maxUnlockedLevel || normalizedAvailable.includes(p.id)
+                }
+
+                const isAltPath = !isAvailable && !isCurrent && p.level >= altStart && p.level <= altEnd
 
                 return {
                     ...p,
                     available: isAvailable,
                     isAltPath,
-                };
-            });
+                    isCurrent,
+                }
+            })
 
-            setDisplayPartnerships(updatedPartnerships);
+            setDisplayPartnerships(updatedPartnerships)
         }
-    }, [partnershipData, currentPartnership]);
+    }, [partnershipData, currentPartnership])
 
     const getRoleBasedTitle = (p: Partnership) => {
         return userRole === "buyer" ? p.buyer : p.vendor
@@ -340,11 +364,10 @@ export default function PartnershipDisplay() {
     }
 
     const handleSubmitPartnership = (partnershipId: string) => {
-        setSelectedPartnershipId(partnershipId) // Set the selected partnership ID to show BuyerAgreement
+        setSelectedPartnershipId(partnershipId)
     }
 
     const handleGoToPay = (p: Partnership) => {
-        // Implement the logic for handleGoToPay here
         console.log(`Go to pay for partnership: ${p.partnership_name}`)
     }
 
@@ -397,6 +420,39 @@ export default function PartnershipDisplay() {
                         </div>
                     </div>
 
+                    {/* Current Partnerships Info */}
+                    {currentPartnership.partnership_level.length > 0 && (
+                        <div
+                            className={`bg-white rounded-3xl shadow-xl p-8 mb-8 border-l-4 border-green-500 ${is4K ? "text-lg" : ""}`}
+                        >
+                            <div className="flex items-center space-x-4">
+                                <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
+                                    <FaCheck className="text-white text-xl" />
+                                </div>
+                                <div>
+                                    <h3 className={`font-bold text-[var(--primary-color)] ${is4K ? "text-2xl" : "text-xl"}`}>
+                                        Current Partnership{currentPartnership.partnership_level.length > 1 ? "s" : ""}
+                                    </h3>
+                                    <div className="space-y-1 mt-2">
+                                        {currentPartnership.partnership_level.map((level, index) => {
+                                            const partnership = partnerships.find((p) => p.id === level.toLowerCase())
+                                            return partnership ? (
+                                                <p key={index} className="text-[var(--primary-color)]/80">
+                                                    {partnership.partnership_name} - {getRoleBasedTitle(partnership)}
+                                                </p>
+                                            ) : null
+                                        })}
+                                    </div>
+                                    <p className="text-sm text-[var(--primary-color)]/70 mt-2">
+                                        Retention Period: {currentPartnership.retention_period} months | KPI Score:{" "}
+                                        {currentPartnership.kpi_score} | Expires:{" "}
+                                        {new Date(currentPartnership.retention_expiration).toLocaleDateString()}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
                     <div
                         className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mb-12 ${is4K ? "gap-12" : ""}`}
                     >
@@ -406,7 +462,7 @@ export default function PartnershipDisplay() {
                                 className={`group relative rounded-3xl shadow-xl transition-all duration-300 transform p-8
   ${p.isAltPath
                                         ? "bg-yellow-50"
-                                        : p.id.toUpperCase() === currentPartnership.partnership_level
+                                        : p.isCurrent
                                             ? "ring-4 ring-green-500 bg-green-50"
                                             : p.available
                                                 ? "cursor-pointer hover:-translate-y-2"
@@ -414,22 +470,19 @@ export default function PartnershipDisplay() {
                                     }
   ${is4K ? "text-lg" : "text-base"}
 `}
-
                             >
                                 {p.isAltPath && (
                                     <div className="absolute top-0 left-0 bg-[var(--secondary-color)] text-white text-xs font-semibold px-3 py-1 rounded-br-2xl rounded-tl-2xl">
                                         Lateral
                                     </div>
                                 )}
-
                                 <div
-                                    className={`absolute top-2 right-7 text-white text-xs font-bold px-2 py-1 rounded-full ${p.available ? "bg-[var(--primary-color)]" : "bg-red-600"}`}
+                                    className={`absolute top-2 right-7 text-white text-xs font-bold px-2 py-1 rounded-full ${p.available || p.isCurrent ? "bg-[var(--primary-color)]" : "bg-red-600"}`}
                                 >
                                     Level {p.level}
                                 </div>
-
                                 <div className="absolute -top-3 -right-3">
-                                    {p.id.toUpperCase() === currentPartnership.partnership_level ? (
+                                    {p.isCurrent ? (
                                         <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
                                             <FaCheck className="text-white text-lg" />
                                         </div>
@@ -443,37 +496,26 @@ export default function PartnershipDisplay() {
                                         </div>
                                     )}
                                 </div>
-
                                 <div className="flex justify-start mb-6 mt-6">
                                     <span
-                                        className={`px-4 py-2 text-sm font-semibold rounded-full ${p.id.toUpperCase() === currentPartnership?.partnership_level
+                                        className={`px-4 py-2 text-sm font-semibold rounded-full ${p.isCurrent
                                             ? "bg-green-100 text-green-700 border border-green-500"
                                             : p.available
                                                 ? "bg-[var(--secondary-light-color)] text-[var(--primary-color)] border border-[var(--secondary-color)]"
                                                 : "bg-[var(--primary-hover-color)]/20 text-[var(--primary-color)] border border-[var(--primary-hover-color)]/40"
                                             }`}
                                     >
-                                        {p.id.toUpperCase() === currentPartnership?.partnership_level
+                                        {p.isCurrent
                                             ? "Current Partnership"
-                                            : (() => {
-                                                const current = partnerships.find(
-                                                    (part) => part.id.toUpperCase() === currentPartnership?.partnership_level,
-                                                )
-                                                return current && p.level < current.level
-                                                    ? "Past Partnership"
-                                                    : p.available
-                                                        ? "Available Now"
-                                                        : "Requirements Not Met"
-                                            })()}
+                                            : p.available
+                                                ? "Available Now"
+                                                : "Requirements Not Met"}
                                     </span>
                                 </div>
-
                                 <h3 className={`font-bold text-[var(--primary-color)] mb-2 ${is4K ? "text-2xl" : "text-xl"}`}>
                                     {p.partnership_name}
                                 </h3>
-
                                 <p className="text-sm font-semibold text-[var(--secondary-color)] mb-4">Role: {getRoleBasedTitle(p)}</p>
-
                                 <div className="flex justify-between mb-6 p-4 bg-[var(--primary-hover-color)]/5 rounded-xl">
                                     <div className="text-center">
                                         <p className="text-xs text-[var(--primary-color)]/70 mb-1">Retention</p>
@@ -485,28 +527,18 @@ export default function PartnershipDisplay() {
                                         <p className="text-sm font-semibold text-[var(--primary-color)]">{p.kpiScore}</p>
                                     </div>
                                 </div>
-
                                 <p className={`leading-relaxed mb-6 ${is4K ? "text-base" : "text-sm"} text-[var(--primary-color)]/80`}>
                                     {getRoleBasedDescription(p)}
                                 </p>
-
-                                {p.available &&
-                                    p.id.toUpperCase() !== currentPartnership.partnership_level &&
-                                    (() => {
-                                        const current = partnerships.find(
-                                            (part) => part.id.toUpperCase() === currentPartnership?.partnership_level,
-                                        )
-                                        return !current || p.level >= current.level
-                                    })() && (
-                                        <button
-                                            onClick={() => handleSubmitPartnership(p.id)}
-                                            className={`w-full py-2 text-sm font-semibold text-white bg-[var(--primary-color)] rounded-full hover:bg-[var(--primary-hover-color)] transition-colors ${is4K ? "text-base" : ""}`}
-                                        >
-                                            Submit Partnership
-                                        </button>
-                                    )}
-
-                                {!p.available && (
+                                {p.available && !p.isCurrent && (
+                                    <button
+                                        onClick={() => handleSubmitPartnership(p.id)}
+                                        className={`w-full py-2 text-sm font-semibold text-white bg-[var(--primary-color)] rounded-full hover:bg-[var(--primary-hover-color)] transition-colors ${is4K ? "text-base" : ""}`}
+                                    >
+                                        Submit Partnership
+                                    </button>
+                                )}
+                                {!p.available && !p.isCurrent && (
                                     <div className="mt-auto space-y-3 pt-4 border-t border-gray-200">
                                         <button
                                             onClick={(e) => {
@@ -517,7 +549,6 @@ export default function PartnershipDisplay() {
                                         >
                                             Learn About Fast-Track Options →
                                         </button>
-
                                         {p.isAltPath && (
                                             <button
                                                 onClick={(e) => {
@@ -533,36 +564,6 @@ export default function PartnershipDisplay() {
                                 )}
                             </div>
                         ))}
-                    </div>
-
-                    <div
-                        className={`bg-white rounded-3xl shadow-xl p-8 mb-8 border-l-4 border-green-500 ${is4K ? "text-lg" : ""}`}
-                    >
-                        <div className="flex items-center space-x-4">
-                            <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
-                                <FaCheck className="text-white text-xl" />
-                            </div>
-                            <div>
-                                <h3 className={`font-bold text-[var(--primary-color)] ${is4K ? "text-2xl" : "text-xl"}`}>
-                                    Current Partnership
-                                </h3>
-                                <p className="text-[var(--primary-color)]/80">
-                                    {
-                                        partnerships.find((p) => p.id.toUpperCase() === currentPartnership.partnership_level)
-                                            ?.partnership_name
-                                    }{" "}
-                                    -{" "}
-                                    {getRoleBasedTitle(
-                                        partnerships.find((p) => p.id.toUpperCase() === currentPartnership.partnership_level)!,
-                                    )}
-                                </p>
-                                <p className="text-sm text-[var(--primary-color)]/70 mt-2">
-                                    Retention Period: {currentPartnership.retention_period} months | KPI Score:{" "}
-                                    {currentPartnership.kpi_score} | Expires:{" "}
-                                    {new Date(currentPartnership.retention_expiration).toLocaleDateString()}
-                                </p>
-                            </div>
-                        </div>
                     </div>
                 </>
             )}

@@ -9,7 +9,6 @@ import { useGlobalContext } from "@/context/ScreenProvider"
 const defaultSlides = [
   {
     id: 0,
-    image: "/placeholder.svg?height=800&width=1200",
     title: "DKC B2B Connect Portal",
     subtitle: "Kashmir Crafts Connecting Global Buyers",
     primaryButton: {
@@ -23,7 +22,6 @@ const defaultSlides = [
   },
   {
     id: 1,
-    image: "/placeholder.svg?height=800&width=1200",
     title: "Discover Amazing Experiences",
     subtitle: "Unleash your potential with our innovative solutions",
     primaryButton: {
@@ -37,7 +35,6 @@ const defaultSlides = [
   },
   {
     id: 2,
-    image: "/placeholder.svg?height=800&width=1200",
     title: "Transform Your Business",
     subtitle: "Built With Artisans",
     primaryButton: {
@@ -87,7 +84,7 @@ export default function VerticalHeroSlider({ slides = defaultSlides, isBanner = 
           <div key={slide.id} className="relative w-full h-[60vh] sm:h-[75vh] lg:h-screen flex-shrink-0">
             <div
               className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
-              style={{ backgroundImage: `url(${slide.image})` }}
+             
             >
               <div className="absolute inset-0" />
             </div>

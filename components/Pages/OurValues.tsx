@@ -201,28 +201,28 @@ export default function OurValue() {
 
   const cards = [
     {
-      title: "Preserving Our Heritage",
+      title: "Preserving Heritage",
       description: "Keeping alive Kashmir’s timeless handcraft legacy",
       detailedDescription:
         "De Koshur Crafts safeguards the intricate artistry of Kashmir by preserving its designs and cultural traditions. We ensure these crafts remain relevant and accessible worldwide, empowering artisans to share their heritage on a global stage and keep it thriving for generations.",
       icon: Sparkles,
     },
     {
-      title: "Empowering The Artisans",
+      title: "Empowering Artisans",
       description: "Providing tools and support for every artisan",
       detailedDescription:
         "At De Koshur Crafts, artisans are at the core of our mission. We provide fair compensation, access to buyers, and training on modern business practices. Through a direct-to-buyer model, we remove intermediaries, ensuring artisans receive recognition and lasting growth.",
       icon: Users,
     },
     {
-      title: "Sustainable Work Ethics",
+      title: "Sustainable Ethics",
       description: "Green fair trade methods trusted worldwide",
       detailedDescription:
         "Sustainability drives every step of our work. We help artisans adopt eco‑friendly methods, reduce waste, and uphold ethical trade standards. Every craft sold reflects fair pay, safe conditions, and a commitment to building a responsible, high‑quality marketplace for all.",
       icon: Leaf,
     },
     {
-      title: "Technology And Craftwork",
+      title: "Technology Craftwork",
       description: "Modern tech empowers authentic craftsmanship",
       detailedDescription:
         "We use modern technology to connect tradition with innovation. Blockchain ensures authenticity and traceability, while AI tools assist artisans in scaling production and managing inventory. This fusion of heritage and tech makes Kashmiri crafts efficient, transparent, and globally accessible.",
@@ -267,7 +267,7 @@ export default function OurValue() {
             is4K
               ? "text-7xl mb-20"
               : "text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl sm:mb-2 md:mb-4 lg:mb-6"
-          } drop-shadow-md text-[var(--primary-color)] font-bold uppercase leading-tight`}
+          } drop-shadow-md text-[var(--primary-color)] font-bold leading-tight`}
         >
           Our Values
         </h2>
