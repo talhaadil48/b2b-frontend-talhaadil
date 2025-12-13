@@ -88,7 +88,6 @@ export default function Home() {
                 loop
                 muted
                 playsInline
-                poster="/business-certification-success.png"
               >
                 <source src="/videos/1.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
@@ -117,7 +116,6 @@ export default function Home() {
                 loop
                 muted
                 playsInline
-                poster="/global-business-growth-empowerment.png"
               >
                 <source src="/videos/4.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
